@@ -10,15 +10,24 @@
    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
-   <script type="text/javascript" src="https://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+   <script src="library.js"></script>
+   <script src="styles.js"></script>
 </head>
-
 <body>
     <div id="mapid"></div>	
 
 </body>
 <script>
 
+/*//Stamen Basemap. change stamen basemaps by swapping in "toner" or "watercolor" for "terrain" under TileLayer
+
+var layer = new L.StamenTileLayer("watercolor");
+var mymap = new L.Map("mapid", {
+    center: new L.LatLng(58.8508688, -101.4674711),
+    zoom: 4
+});
+mymap.addLayer(layer);  */
 
 //Thunderforest basemaps.
 var mymap = L.map('mapid').setView([58.8508688, -101.4674711], 4);
@@ -27,7 +36,16 @@ var mymap = L.map('mapid').setView([58.8508688, -101.4674711], 4);
 L.tileLayer('https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=c9a8f4730879428083dd724734f517e3', {
 attribution: 'Maps © <a href="http://www.thunderforest.com">Thunderforest</a>, Data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
         crossOrigin: true
-      }).addTo(mymap);
+      }).addTo(mymap); 
+
+L.geoJSON(pre1975, {
+	style: pre1975style
+}).addTo(mymap);
+
+L.geoJSON(post1975, {
+	style: post1975style
+}).addTo(mymap);
+
 
 //Adds a scale bar to the bottom left of the map. Useful for context if you're a NERD
 L.control.scale().addTo(mymap);
