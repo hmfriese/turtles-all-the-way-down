@@ -10,24 +10,14 @@
    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
-   <script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
    <script src="library.js"></script>
-   <script src="styles.js"></script>
+   <script src="geoJSONstyles.js"></script>
 </head>
 <body>
     <div id="mapid"></div>	
 
 </body>
 <script>
-
-/*//Stamen Basemap. change stamen basemaps by swapping in "toner" or "watercolor" for "terrain" under TileLayer
-
-var layer = new L.StamenTileLayer("watercolor");
-var mymap = new L.Map("mapid", {
-    center: new L.LatLng(58.8508688, -101.4674711),
-    zoom: 4
-});
-mymap.addLayer(layer);  */
 
 //Thunderforest basemaps.
 var mymap = L.map('mapid').setView([58.8508688, -101.4674711], 4);
