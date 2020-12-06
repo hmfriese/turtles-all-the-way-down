@@ -11,3 +11,10 @@ var post1975style = {
 	"opacity": 0.65,
 	"color": "#7D4F50"
 };
+
+var territoryStyle = {
+	"fillColor": "#303036",
+	weight: 5,
+	"opacity": 0.65,
+	"color": "#303036"
+};
