@@ -19,6 +19,7 @@
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
    <script src="nativeLand.js"></script>
+   <script src="library.js"></script>
    <script src="js/geoJSONstyles.js"></script>
 </head>
 <body>
@@ -67,9 +68,28 @@ attribution: 'Maps © <a href="http://www.thunderforest.com">Thunderforest</a>, 
       }).addTo(mymap);
 
 //Loads geoJSON from nativeLand.js
-L.geoJSON(nativeLandTerritory, {
-	style: pre1975style
+var nativeLandTerritoryLayer = L.geoJSON(nativeLandTerritory, {
+	style: territoryStyle
 }).addTo(mymap);
+
+//Loads geoJSON from treaties (pre and post 1975)
+var pre1975Layer = L.geoJSON(pre1975, {
+	style: pre1975style
+});
+
+var post1975Layer = L.geoJSON(post1975, {
+	style: post1975style
+});
+
+//variables+names for toggle menu
+var polygonToggle = {
+	"Territories" : nativeLandTerritoryLayer,
+	"Treaties Pre 1975" : pre1975Layer,
+	"Treaties Post 1975" : post1975Layer
+};
+
+//groups layers to toggle geoJSON views
+L.control.layers(null, polygonToggle).addTo(mymap);
 
 //Adds a scale bar to the bottom left of the map. Useful for context if you're a NERD
 L.control.scale().addTo(mymap);
