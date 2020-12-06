@@ -19,7 +19,8 @@
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
    <script src="nativeLand.js"></script>
-   <script src="library.js"></script>
+   <script src="post1975.js"></script>
+   <script src="pre1975.js"></script>
    <script src="js/geoJSONstyles.js"></script>
 </head>
 <body>
@@ -67,6 +68,13 @@ attribution: 'Maps © <a href="http://www.thunderforest.com">Thunderforest</a>, 
         crossOrigin: true
       }).addTo(mymap);
 
+//Call popups from geoJSON props
+function popUp(feature, layer) {
+	if(feature.properties && feature.properties.ENAME) {
+		layer.bindPopup(feature.properties.ENAME)
+	}
+};
+
 //Loads geoJSON from nativeLand.js
 var nativeLandTerritoryLayer = L.geoJSON(nativeLandTerritory, {
 	style: territoryStyle
@@ -74,11 +82,13 @@ var nativeLandTerritoryLayer = L.geoJSON(nativeLandTerritory, {
 
 //Loads geoJSON from treaties (pre and post 1975)
 var pre1975Layer = L.geoJSON(pre1975, {
-	style: pre1975style
+	style: pre1975style,
+	onEachFeature: popUp
 });
 
 var post1975Layer = L.geoJSON(post1975, {
-	style: post1975style
+	style: post1975style,
+	onEachFeature: popUp
 });
 
 //variables+names for toggle menu
