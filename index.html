@@ -18,7 +18,6 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
-    <!--<script src="nativeLand.js"></script>-->
     <script src="post1975.js"></script>
     <script src="pre1975.js"></script>
     <script src="js/geoJSONstyles.js"></script>
@@ -32,10 +31,12 @@
 
 <!--Nav Bar-->
     <nav>
-		<a href="index.html">Home</a>
+		<a class="current" href="index.html">Home</a>
+		<a href="about.html">About Us</a>
+		<a href="bookList.html">Book List/Resources/Extended Bibliography</a>
+		
     </nav>
 
-<!--Headings-->
 <div class="heading1">
     <h2>Welcome!</h2>
 </div>
@@ -71,11 +72,16 @@
 //Map view--([lat, long], zoom)
 var mymap = L.map("mapid").setView([58.8508688, -101.4674711], 4);
 
-//Thunderforest base map and attribution
-L.tileLayer("https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=c9a8f4730879428083dd724734f517e3", {
-attribution: 'Maps © <a href="http://www.thunderforest.com">Thunderforest</a>, Data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
         crossOrigin: true
       }).addTo(mymap);
+
+//Thunderforest base map and attribution
+/*L.tileLayer("https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=c9a8f4730879428083dd724734f517e3", {
+attribution: 'Maps © <a href="http://www.thunderforest.com">Thunderforest</a>, Data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
+        crossOrigin: true
+      }).addTo(mymap);*/
 
 //Call popups from geoJSON props
 function popUp(feature, layer) {
@@ -83,11 +89,6 @@ function popUp(feature, layer) {
         layer.bindPopup(feature.properties.ENAME)
 	}
 };
-
-//Loads geoJSON from nativeLand.js
-/*var nativeLandTerritoryLayer = L.geoJSON(nativeLandTerritory, {
-    style: territoryStyle
-}).addTo(mymap);*/
 
 //Loads geoJSON from treaties (pre and post 1975)
 var pre1975Layer = L.geoJSON(pre1975, {
@@ -102,7 +103,6 @@ var post1975Layer = L.geoJSON(post1975, {
 
 //variables+names for toggle menu
 var polygonToggle = {
-    //"Territories" : nativeLandTerritoryLayer,
     "Treaties Pre 1975" : pre1975Layer,
     "Treaties Post 1975" : post1975Layer
 };
@@ -113,17 +113,39 @@ L.control.layers(null, polygonToggle).addTo(mymap);
 //Adds a scale bar to the bottom left of the map. Useful for context if you're a NERD
 L.control.scale().addTo(mymap);
 
+//Icons for book markers
+var bookIcon = L.icon({
+	iconUrl: 'pinBook.png',
+
+	iconSize: [40, 40]
+});
+
 //Markers for Books
-var raintree = L.marker([49.8534844, -97.4324119]).addTo(mymap);
-var birdie = L.marker([49.404935, -120.0425115]).addTo(mymap);
+var raintree = L.marker([49.8534844, -97.4324119], {icon: bookIcon}).addTo(mymap);
+var birdie = L.marker([49.404935, -120.0425115], {icon: bookIcon}).addTo(mymap);
+var horse = L.marker([49.986389, -94.67], {icon: bookIcon}).addTo(mymap);
 
-
-//Markers for Authors
-
-
-//Popups
+//Book Popups
 raintree.bindPopup("<i>In Search of April Raintree</i> by Beatrice Mosionier<br>[INSERT WRITE UP ABOUT THIS BOOK HERE]");
 birdie.bindPopup("<i>Birdie</i> by Tracey Lindberg<br>[INSERT WRITE UP ABOUT THIS BOOK HERE");
+horse.bindPopup("<i>Indian Horse</i> by Richard Wagamese");
+
+//Icons for authors markers
+var authorIcon = L.icon({
+	iconUrl: 'pinAuthor.png',
+
+	iconSize: [40, 40]
+});
+
+//Markers for Authors
+var mosionier= L.marker([49.853959, -97.2923068], {icon: authorIcon}).addTo(mymap);
+var lindberg= L.marker([55.2610841, -120.0416557], {icon: authorIcon}).addTo(mymap);
+var wagamese= L.marker([50.7414193, -120.5789156], {icon: authorIcon}).addTo(mymap);
+
+//Author Popups
+mosionier.bindPopup("[PLACEHOLDER FOR MOSIONIER POPUPS]");
+lindberg.bindPopup("[PLACEHOLDER FOR LINDBERG BIO]");
+wagamese.bindPopup("[PLACEHOLDER FOR WAGAMESE BIO]");
 
 </script>
 
