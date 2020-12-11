@@ -62,9 +62,17 @@ nav a{
 }
 
 nav a:visited{
+	background-color: #D6E2E9;
+}
+
+nav a:hover{
 	background-color: #F7F7F7;
 }
 
+/*placeholder flag because this isn't working withouth !important!*/
+.current{
+	background-color: #f7f7f7 !important;
+}
 /************************
 Paragraph Headings
 ************************/
