@@ -14,7 +14,7 @@ p {
 	color: #303036; /*text colour*/
 	padding-left: 14%;
 	padding-right: 14%;
-	font-size: 15px;
+	font-size: 110%;
 }
 
 /*Links*/
@@ -75,7 +75,7 @@ Paragraph Headings
 	padding-right: 14%;
 	color: #303036;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 16px;
+	font-size: 130%;
 }
 
 .subheading{
@@ -84,7 +84,7 @@ Paragraph Headings
 	padding-right: 14%;
 	color: #303036;
 	font-family: 'Open Sans', sans-serif;
-	font-size: 14px;
+	font-size: 120%;
 }
 
 /************************
