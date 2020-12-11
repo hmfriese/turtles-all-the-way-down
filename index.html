@@ -2,51 +2,51 @@
 <html lang=en>
 
 <head>
-	<meta charset=utf-8>
-	<title>Turtles All the Way Down: Mapping Indigenous Authorship</title>
-	<link type="text/css" rel="stylesheet" href="css/styles.css" />   
+    <meta charset=utf-8>
+    <title>Turtles All the Way Down: Mapping Indigenous Authorship</title>
+    <link type="text/css" rel="stylesheet" href="css/styles.css" />   
 	
 <!--Google Fonts Are Here-->
-	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
 
 <!--JavaScript APIs and Plugins-->
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
 	integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>
-   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
-   <script src="nativeLand.js"></script>
-   <script src="post1975.js"></script>
-   <script src="pre1975.js"></script>
-   <script src="js/geoJSONstyles.js"></script>
+    <script src="nativeLand.js"></script>
+    <script src="post1975.js"></script>
+    <script src="pre1975.js"></script>
+    <script src="js/geoJSONstyles.js"></script>
 </head>
 <body>
 
 <!--Header-->
-	<div class="header">
+    <div class="header">
 		<h1>Turtles All the Way Down: Mapping Indigenous Authorship</h1>
-	</div>
+    </div>
 
 <!--Nav Bar-->
-	<nav>
+    <nav>
 		<a href="index.html">Home</a>
-	</nav>
+    </nav>
 
 <!--Headings-->
 <div class="heading1">
-	<h2>This is a high level heading</h2>
+    <h2>Welcome!</h2>
 </div>
 
 <div class="subheading">
-	<h3>This is a lower level heading</h3>
+    <h3>This is a lower level heading</h3>
 </div>
 	
-<p>
-	Lorem ipsum dolores etcetera.
-</p>
+<p>All stories have places but all places also have stories. This project aims to connect stories to their places through an interactive map that highglights both Indigenous Land claims through Treaty maps, and Indigenous written literatures and/or books.</p>
+
+<p>While we recognize that Inidgenous relationships to the Land are both sacred and not constrained by the geographic boundaries that the numbered Treaties represent, we would like to suggest this map as a way to think about the relationships and backgrounds of Indigenous authors across the Land now called "Canada."</p>
 
 <!--The Map!-->
     <div id="mapid"></div>	
@@ -55,47 +55,53 @@
 	More text to see what else we can do.
 </p>
 
+
+<div class="footer">
+    <h4 id="treatyAckn">We respectfully acknowledge that we are creating this project on Treaty 6 territory, a traditional gathering plcace for diverse Indigenous Peoples including the Cree, Blackfoot, Métis, Nakots Sioux, Iroquois, Dene, Ojibway/Saulteaux/Anishinaabe, Inuit, and monay others whose histories, languages and cultures continue to influence our vibrant community.</h4>
+</div>
+
 </body>
 
 <!--Scripts for the map-->
 <script>
+
 //Map view--([lat, long], zoom)
-var mymap = L.map('mapid').setView([58.8508688, -101.4674711], 4);
+var mymap = L.map("mapid").setView([58.8508688, -101.4674711], 4);
 
 //Thunderforest base map and attribution
-L.tileLayer('https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=c9a8f4730879428083dd724734f517e3', {
+L.tileLayer("https://tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey=c9a8f4730879428083dd724734f517e3", {
 attribution: 'Maps © <a href="http://www.thunderforest.com">Thunderforest</a>, Data © <a href="http://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>',
         crossOrigin: true
       }).addTo(mymap);
 
 //Call popups from geoJSON props
 function popUp(feature, layer) {
-	if(feature.properties && feature.properties.ENAME) {
-		layer.bindPopup(feature.properties.ENAME)
+    if(feature.properties && feature.properties.ENAME) {
+        layer.bindPopup(feature.properties.ENAME)
 	}
 };
 
 //Loads geoJSON from nativeLand.js
 var nativeLandTerritoryLayer = L.geoJSON(nativeLandTerritory, {
-	style: territoryStyle
+    style: territoryStyle
 }).addTo(mymap);
 
 //Loads geoJSON from treaties (pre and post 1975)
 var pre1975Layer = L.geoJSON(pre1975, {
-	style: pre1975style,
-	onEachFeature: popUp
+    style: pre1975style,
+    onEachFeature: popUp
 });
 
 var post1975Layer = L.geoJSON(post1975, {
-	style: post1975style,
-	onEachFeature: popUp
+    style: post1975style,
+    onEachFeature: popUp
 });
 
 //variables+names for toggle menu
 var polygonToggle = {
-	"Territories" : nativeLandTerritoryLayer,
-	"Treaties Pre 1975" : pre1975Layer,
-	"Treaties Post 1975" : post1975Layer
+    "Territories" : nativeLandTerritoryLayer,
+    "Treaties Pre 1975" : pre1975Layer,
+    "Treaties Post 1975" : post1975Layer
 };
 
 //groups layers to toggle geoJSON views
