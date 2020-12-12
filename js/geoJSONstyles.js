@@ -1,27 +1,17 @@
 var pre1975style = {
-	"fillColor": "000000",
+	"fillColor": "#f7f7f7",
 	"weight": 2,
 	"opacity": 0.65,
-	"color": "blue",
-	"dashArray": 3,
-    "fillOpacity":0.7
+	"color": "#f7f7f7",
+	"dashArray": 4,
+    "fillOpacity":0.2
 };
 
 var post1975style = {
-	"fillColor": "#564E58",
+	"fillColor": "#70B77E",
 	"weight": 2,
 	"opacity": 0.65,
-	"color": "#7D4F50",
-	"dashArray": 5,
-	"fillOpacity":0.7
+	"color": "#70B77E",
+	"dashArray": 4,
+	"fillOpacity":0.3
 };
-
-var territoryStyle = {
-	"fillColor": "#303036",
-	"weight": 5,
-	"opacity": 0.65,
-	"color": "#303036",
-	"dashArray": 3,
-	"fillOpacity":0.7
-};
-
